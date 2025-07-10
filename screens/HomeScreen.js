@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, TextInput, StyleSheet, Image } from 'react-native';
-import SocialButton from '../components/SocialButton'
+import { View, Text, Pressable, TextInput, StyleSheet, Image, Linking } from 'react-native';
+import SocialButton from '../components/SocialButton';
 
 export default function HomeScreen({ navigation }) {
     const [username, setUsername] = useState('');
@@ -31,7 +31,9 @@ export default function HomeScreen({ navigation }) {
                     onChangeText={setPassword}
                 />
                 <View style={styles.otherRow}>
-                    <Text style={styles.footerLink}>Forgot Password</Text>
+                    <Text style={styles.footerLink}
+                        onPress={() => navigation.navigate('ForgotPassword', { userName: username, password: password })}
+                    >Forgot Password</Text>
                 </View>
                 <Pressable
                     style={styles.buttonHome}
@@ -61,10 +63,9 @@ export default function HomeScreen({ navigation }) {
                     />
                     <SocialButton
                         image={require('../assets/apple.png')}
-                        onPress={() => navigation.navigate('Details', {
-                            userName: username,
-                            password: password,
-                        })}
+                        onPress={() => {
+                            Linking.openURL('https://example.com');
+                        }}
                     />
                 </View>
                 <View style={styles.footerRow}>

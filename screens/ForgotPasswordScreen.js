@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, Image } from 'react-native';
 import SocialButton from '../components/SocialButton'
 
-export default function SignupScreen({ navigation }) {
+export default function ForgotPasswordScreen({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -17,7 +17,7 @@ export default function SignupScreen({ navigation }) {
                     })}>&larr; Back to login</Text>
                 </View>
 
-                <Text style={styles.headerContainer}>Sign Up</Text>
+                <Text style={styles.headerContainer}>Create New Password</Text>
                 <TextInput
                     style={styles.input}
                     placeholder="Username"

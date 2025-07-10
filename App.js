@@ -6,6 +6,7 @@ import { ActivityIndicator } from 'react-native';
 
 import HomeScreen from './screens/HomeScreen';
 import SignupScreen from './screens/SignupScreen';
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import DetailsScreen from './screens/DetailsScreen';
 
 const Stack = createNativeStackNavigator();
@@ -32,9 +33,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{
         headerShown: false,
+        animation: 'none'
       }}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
