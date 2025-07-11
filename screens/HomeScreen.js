@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, Image, Linking } from 'react-native';
 import SocialButton from '../components/SocialButton';
+import IconTextInput from '../components/LoginInput';
 
 export default function HomeScreen({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     return (
         <View style={styles.container}>
@@ -18,21 +20,26 @@ export default function HomeScreen({ navigation }) {
             </View>
             <View style={styles.bodycontainer}>
                 <Text style={styles.headerContainer}>Login</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Username"
+                <IconTextInput
                     value={username}
                     onChangeText={setUsername}
+                    placeholder="Email"
+                    prefixIcon="mail-outline"
+                    suffixIcon="clear"
+                    onSuffixPress={() => setUsername('')}
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Password"
+                <IconTextInput
                     value={password}
                     onChangeText={setPassword}
+                    placeholder="Password"
+                    prefixIcon="lock-outline"
+                    suffixIcon={showPassword ? 'visibility-off' : 'visibility'}
+                    onSuffixPress={() => setShowPassword(!showPassword)}
+                    secureTextEntry={!showPassword}
                 />
                 <View style={styles.otherRow}>
                     <Text style={styles.footerLink}
-                        onPress={() => navigation.navigate('ForgotPassword', { userName: username, password: password })}
+                        onPress={() => navigation.navigate('ForgotPassword')}
                     >Forgot Password</Text>
                 </View>
                 <Pressable
@@ -49,22 +56,20 @@ export default function HomeScreen({ navigation }) {
                 <View style={styles.socialRow}>
                     <SocialButton
                         image={require('../assets/facebook.png')}
-                        onPress={() => navigation.navigate('Details', {
-                            userName: username,
-                            password: password,
-                        })}
+                        onPress={() => {
+                            Linking.openURL('https://facebook.com');
+                        }}
                     />
                     <SocialButton
                         image={require('../assets/google.png')}
-                        onPress={() => navigation.navigate('Details', {
-                            userName: username,
-                            password: password,
-                        })}
+                        onPress={() => {
+                            Linking.openURL('https://google.com');
+                        }}
                     />
                     <SocialButton
                         image={require('../assets/apple.png')}
                         onPress={() => {
-                            Linking.openURL('https://example.com');
+                            Linking.openURL('https://apple.com');
                         }}
                     />
                 </View>
@@ -137,7 +142,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         color: '#026A75',
-        fontFamily: 'Poppins-Regular',
+        fontFamily: 'Poppins-SemiBold',
         fontSize: 30,
         marginTop: -20,
         marginLeft: 40,

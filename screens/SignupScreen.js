@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, Image } from 'react-native';
-import SocialButton from '../components/SocialButton'
+import IconTextInput from '../components/LoginInput'
 
 export default function SignupScreen({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [phoneNumber, setPhoneNumber] = useState('');
 
     return (
         <View style={styles.container}>
@@ -18,29 +22,39 @@ export default function SignupScreen({ navigation }) {
                 </View>
 
                 <Text style={styles.headerContainer}>Sign Up</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Username"
+                <IconTextInput
                     value={username}
                     onChangeText={setUsername}
+                    placeholder="Email"
+                    prefixIcon="mail-outline"
+                    suffixIcon="clear"
+                    onSuffixPress={() => setUsername('')}
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Password"
+                <IconTextInput
                     value={password}
                     onChangeText={setPassword}
-                />
-                <TextInput
-                    style={styles.input}
                     placeholder="Password"
-                    value={password}
-                    onChangeText={setPassword}
+                    prefixIcon="lock-outline"
+                    suffixIcon={showPassword ? 'visibility-off' : 'visibility'}
+                    onSuffixPress={() => setShowPassword(!showPassword)}
+                    secureTextEntry={!showPassword}
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={setPassword}
+                <IconTextInput
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
+                    placeholder="Confirm Password"
+                    prefixIcon="lock-outline"
+                    suffixIcon={showConfirmPassword ? 'visibility-off' : 'visibility'}
+                    onSuffixPress={() => setShowConfirmPassword(!showConfirmPassword)}
+                    secureTextEntry={!showConfirmPassword}
+                />
+                <IconTextInput
+                    value={phoneNumber}
+                    onChangeText={setPhoneNumber}
+                    placeholder="Phone"
+                    prefixIcon="smartphone"
+                    suffixIcon="clear"
+                    onSuffixPress={() => setPhoneNumber('')}
                 />
                 <Pressable
                     style={styles.buttonHome}
@@ -84,7 +98,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
 
         alignItems: 'center',
-        marginTop: 50,
+        marginTop: 20,
         marginLeft: 50,
         marginRight: 50
     },
@@ -109,7 +123,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         color: '#026A75',
-        fontFamily: 'Poppins-Regular',
+        fontFamily: 'Poppins-SemiBold',
         fontSize: 30,
         marginTop: 20,
         marginBottom: 20,

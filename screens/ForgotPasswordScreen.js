@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, Image } from 'react-native';
-import SocialButton from '../components/SocialButton'
+import IconTextInput from '../components/LoginInput'
 
 export default function ForgotPasswordScreen({ navigation }) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
 
     return (
         <View style={styles.container}>
@@ -12,41 +11,23 @@ export default function ForgotPasswordScreen({ navigation }) {
             <View style={styles.bodycontainer}>
                 <View style={styles.footerRow}>
                     <Text style={styles.footerLink} onPress={() => navigation.navigate('Home', {
-                        userName: username,
-                        password: password,
+                        userName: '',
+                        password: '',
                     })}>&larr; Back to login</Text>
                 </View>
-
                 <Text style={styles.headerContainer}>Create New Password</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Username"
-                    value={username}
-                    onChangeText={setUsername}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={setPassword}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={setPassword}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={setPassword}
+                <IconTextInput
+                    value={email}
+                    onChangeText={setEmail}
+                    placeholder="Email"
+                    prefixIcon="mail-outline"
+                    suffixIcon="clear"
+                    onSuffixPress={() => setEmail('')}
                 />
                 <Pressable
                     style={styles.buttonHome}
-                    onPress={() => navigation.navigate('Details', { userName: username, password: password })}
                 >
-                    <Text style={styles.buttonText}>Sign Up</Text>
+                    <Text style={styles.buttonText}>Send Email</Text>
                 </Pressable>
             </View>
         </View>
@@ -82,9 +63,8 @@ const styles = StyleSheet.create({
     },
     footerRow: {
         flexDirection: 'row',
-
         alignItems: 'center',
-        marginTop: 50,
+        marginTop: 20,
         marginLeft: 50,
         marginRight: 50
     },
@@ -100,7 +80,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontFamily: 'Poppins-Regular',
         fontSize: 55,
-
     },
     headerSubtitle: {
         color: 'white',
@@ -129,7 +108,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#ddd',
         width: '100%',
         bottom: 0,
-        // justifyContent: 'center' 
     },
     footerTitle: {
         fontFamily: 'Poppins-Regular',

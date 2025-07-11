@@ -1,30 +1,65 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const LoginInput = ({ image, onPress, backgroundColor = '#FFF9FF', textColor = '#fff' }) => {
+const IconTextInput = ({
+    value,
+    onChangeText,
+    placeholder,
+    prefixIcon,
+    suffixIcon,
+    onSuffixPress,
+    secureTextEntry = false,
+    keyboardType = 'default',
+    style = {},
+}) => {
     return (
-        <TouchableOpacity style={[styles.button, { backgroundColor }]} onPress={onPress}>
-            <Image source={image} style={styles.image} />
-        </TouchableOpacity>
+        <View style={[styles.inputContainer, style]}>
+            {prefixIcon && (
+                <Icon name={prefixIcon} size={20} color="#ccc" style={styles.icon} />
+            )}
+
+            <TextInput
+                style={styles.input}
+                placeholder={placeholder}
+                value={value}
+                onChangeText={onChangeText}
+                placeholderTextColor="#ccc"
+                secureTextEntry={secureTextEntry}
+                keyboardType={keyboardType}
+                autoCapitalize="none"
+            />
+
+            {suffixIcon && onSuffixPress && (
+                <TouchableOpacity onPress={onSuffixPress}>
+                    <Icon name={suffixIcon} size={20} color="#ccc" style={styles.icon} />
+                </TouchableOpacity>
+            )}
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    button: {
-        paddingVertical: 10,
-        paddingHorizontal: 28,
-        borderRadius: 10,
+    inputContainer: {
+        flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 10,
+        paddingHorizontal: 10,
+        backgroundColor: '#fff',
+        marginLeft: 40,
+        marginRight: 40,
+        marginTop: 20,
+        borderRadius: 20,
     },
-    buttonText: {
-        fontSize: 16,
-        fontWeight: 'bold',
+    icon: {
+        marginHorizontal: 8,
     },
-    image: {
-        width: 25,
-        height: 25
-    }
+    input: {
+        flex: 1,
+        height: 40,
+        // fontSize: 16,
+        color: '#ccc',
+        fontFamily: 'Poppins-Regular'
+    },
 });
 
-export default LoginInput;
+export default IconTextInput;
